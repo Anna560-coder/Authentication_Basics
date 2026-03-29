@@ -1,0 +1,297 @@
+﻿@model _220008504_AuthBasics.Models.LoginFormModel
+
+@{
+    ViewData["Title"] = "Log In";
+}
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+        color: #f8fafc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 460px;
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(14px);
+        border-radius: 24px;
+        padding: 35px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+        animation: fadeUp 0.9s ease;
+    }
+
+    @@keyframes fadeUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+        background: linear-gradient(90deg, #60a5fa, #a78bfa, #22d3ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+        text-align: center;
+        color: #cbd5e1;
+        margin-bottom: 25px;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+
+    .error-box {
+        background: rgba(239, 68, 68, 0.18);
+        border: 1px solid rgba(239, 68, 68, 0.45);
+        color: #fecaca;
+        padding: 12px 14px;
+        border-radius: 12px;
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+    }
+
+    .validation-summary {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #cbd5e1;
+    }
+
+    .input-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 14px;
+        padding: 0 14px;
+        transition: all 0.3s ease;
+    }
+
+        .input-box:focus-within {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
+        }
+
+    .input-icon {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .input-box input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #ffffff;
+        padding: 14px 0;
+        font-size: 0.95rem;
+    }
+
+        .input-box input::placeholder {
+            color: #94a3b8;
+        }
+
+    .password-toggle {
+        background: transparent;
+        border: none;
+        color: #93c5fd;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+        .password-toggle:hover {
+            color: #dbeafe;
+        }
+
+    .field-validation-error {
+        display: block;
+        color: #fca5a5;
+        font-size: 0.85rem;
+        margin-top: 6px;
+    }
+
+    .remember-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+    }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+    }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #60a5fa;
+            cursor: pointer;
+        }
+
+    .helper-text {
+        color: #94a3b8;
+        font-size: 0.85rem;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+    }
+
+        .login-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 16px 30px rgba(124, 58, 237, 0.28);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+    .footer-note {
+        text-align: center;
+        color: #94a3b8;
+        margin-top: 18px;
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    @@media (max-width: 520px) {
+        .login-container
+
+    {
+        padding: 26px 20px;
+    }
+
+    .title {
+        font-size: 1.7rem;
+    }
+
+    .remember-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    }
+</style>
+
+<div class="login-container">
+    <h1 class="title">Welcome Back</h1>
+    <p class="subtitle">
+        Sign in to continue to your secure cookie authentication portal.
+    </p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="error-box" asp-validation-summary="ModelOnly"></div>
+    }
+
+    <form asp-action="Login" asp-controller="Auth" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="UserName" class="form-label">User Name</label>
+            <div class="input-box">
+                <span class="input-icon">👤</span>
+                <input asp-for="UserName" type="text" placeholder="Enter your username" />
+            </div>
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password" class="form-label">Password</label>
+            <div class="input-box">
+                <span class="input-icon">🔒</span>
+                <input asp-for="Password" type="password" id="passwordInput" placeholder="Enter your password" />
+                <button type="button" class="password-toggle" onclick="togglePassword()">Show</button>
+            </div>
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <div class="remember-row">
+            <label class="remember-me">
+                <input asp-for="RememberMe" />
+                <span>Remember Me</span>
+            </label>
+            <span class="helper-text">Keeps you signed in on this device</span>
+        </div>
+
+        <button type="submit" class="login-btn">Log In</button>
+    </form>
+
+    <p class="footer-note">
+        Secure login powered by ASP.NET Core cookie authentication.
+    </p>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("passwordInput");
+            const toggleButton = document.querySelector(".password-toggle");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        }
+    </script>
+}
